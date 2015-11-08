@@ -53,9 +53,23 @@ raspberryMovies.factory('Raspberry',function($firebaseArray, $firebaseObject,Fir
         mainCtrl.message = 'Raspberry Movies home page!';
     });
 
-    raspberryMovies.controller('ChooseCtrl', function($state, $scope) {
+    raspberryMovies.controller('ChooseCtrl', function($state, $scope,$http) {
         var chooseCtrl = this;
         $scope.message = 'Choose your next movie for your friend.';
+        
+        $http({
+              method: 'GET',
+              url: 'https://api.themoviedb.org/3/movie/popular?api_key=bc94cbdbf16a0bc39441827885a21f97'
+            }).then(function successCallback(response) {
+                console.log(response);
+                chooseCtrl.movies = response.data.results;
+                // this callback will be called asynchronously
+                // when the response is available
+              }, function errorCallback(response) {
+                  console.log(response);
+                // called asynchronously if an error occurs
+                // or server returns response with an error status.
+              });
     });
 
     raspberryMovies.controller('WatchCtrl', function(Raspberry,$firebaseObject) {
@@ -70,11 +84,13 @@ raspberryMovies.factory('Raspberry',function($firebaseArray, $firebaseObject,Fir
                 console.log('bay1 is: ' + snapshot.val().flashled);
                 //$scope.message = 'You have a movie waiting. Press the button on the Raspberry Pi to show it.';
                 watchCtrl.message = 'You have a movie waiting. Press the button on the Raspberry Pi to show it.';
+                watchCtrl.icon = '<i class="fa fa-pointer-o"></i>';
+                
             }
             else{
                 console.log('bay1 is: ' + snapshot.val().flashled);
-                //$scope.message = 'Watch your movie here.';
                 watchCtrl.message = 'Watch your movie here.';
+                watchCtrl.movie = snapshot.val().movie;
             }
             
             return watchCtrl.message;

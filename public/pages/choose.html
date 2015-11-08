@@ -1,5 +1,24 @@
 <!-- choose.html -->
     <div class="jumbotron text-center">
-        <h1>Choose Me Page</h1>
-        <p>{{ chooseCtrl.message }}</p>
+        <h1>Choose a movie</h1>
+        <p>{{ chooseCtrl.message }}</p>        
     </div>
+    <div class="container">
+        <div class="col-md-7" id="movies" ng-repeat="movie in chooseCtrl.movies">
+            <ul class="media-list">
+              <li class="media">
+                <div class="media-left">
+                  <a href="#" ng-click="select">
+                    <img class="media-object" width="250px" src="http://image.tmdb.org/t/p/w300{{ movie.poster_path }}" alt="{{ movie.title }}">
+                  </a>
+                </div>
+                <button class="btn btn-primary" ng-click="">WATCH THIS!</button
+                <div class="media-body">
+                  <h4 class="media-heading">{{ movie.title }}</h4>
+                  {{ movie.overview }}
+                </div>
+              </li>
+            </ul>
+        </div>
+    </div>
+    
