@@ -60,33 +60,27 @@ raspberryMovies.factory('Raspberry',function($firebaseArray, $firebaseObject,Fir
 
     raspberryMovies.controller('WatchCtrl', function(Raspberry,$firebaseObject) {
         
-        var watchCtrl = this;
-        watchCtrl.message = 'before getting firebase stuff';
-                
-        var obj = $firebaseObject(Raspberry.ref);
-
-         // to take an action after the data loads, use the $loaded() promise
-         obj.$loaded().then(function() {
-            console.log("loaded record:", obj.$id, obj.flashled);
-         });
+        var watchCtrl = this;        
         
-        
-//        raspberryRef.on('value', function(snapshot) {
-//         console.log(snapshot.val());
-//            if(snapshot.val().bikes.bay1){
-//                console.log('bay1 is: ' + snapshot.val().bikes.bay1);
-//                //$scope.message = 'You have a movie waiting. Press the button on the Raspberry Pi to show it.';
-//                watchCtrl.message = 'You have a movie waiting. Press the button on the Raspberry Pi to show it.';
-//            }
-//            else{
-//                console.log('bay1 is: ' + snapshot.val().bikes.bay1);
-//                //$scope.message = 'Watch your movie here.';
-//                watchCtrl.message = 'Watch your movie here.';
-//            }
-//        }, function (errorObject) {
-//          console.log("The read failed: " + errorObject.code);
-//        });
-        
-        console.log('I am a string');
-
+        Raspberry.ref.on('value', function(snapshot) {
+          console.log(snapshot.val());
+          var message;
+            
+            if(snapshot.val().flashled){
+                console.log('bay1 is: ' + snapshot.val().flashled);
+                //$scope.message = 'You have a movie waiting. Press the button on the Raspberry Pi to show it.';
+                watchCtrl.message = 'You have a movie waiting. Press the button on the Raspberry Pi to show it.';
+            }
+            else{
+                console.log('bay1 is: ' + snapshot.val().flashled);
+                //$scope.message = 'Watch your movie here.';
+                watchCtrl.message = 'Watch your movie here.';
+            }
+            
+            return watchCtrl.message;
+            
+        }, function (errorObject) {
+          console.log("The read failed: " + errorObject.code);
+        });
+    
     });

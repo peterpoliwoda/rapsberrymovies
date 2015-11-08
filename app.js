@@ -22,12 +22,12 @@ button.watch(function(err, state) {
   if(state == 1) {
     // turn LED on
     myFirebaseRef.child('bikes/bay1').set(false);
-    myFirebaseRef.child('raspberry/flashled').set(true);
-    led.writeSync(1);
+    myFirebaseRef.child('raspberry/flashled').set(false);
+//    led.writeSync(1);
   } else {
     // turn LED off
-    myFirebaseRef.child('bikes/bay1').set(true);
-    myFirebaseRef.child('raspberry/flashled').set(false);
-    led.writeSync(0);
+//    myFirebaseRef.child('bikes/bay1').set(true);
+//    myFirebaseRef.child('raspberry/flashled').set(false);
+//    led.writeSync(0);
   }
 });
