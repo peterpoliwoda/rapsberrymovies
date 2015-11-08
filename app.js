@@ -7,7 +7,7 @@ var GPIO = require('onoff').Gpio,
 
 var myFirebaseRef = new Firebase('https://raspberrymovies.firebaseio.com/');
 
-myFirebaseRef.on("value", function(snapshot) {
+myFirebaseRef.child('bikes').on("value", function(snapshot) {
   console.log(snapshot.val());
 });
 
@@ -29,12 +29,3 @@ button.watch(function(err, state) {
     led.writeSync(0);
   }
 });
-
-//var stream = button.pipe(led);
-//stream.pipe(process.stdout);
-
-//http.createServer(function (req, res) {
-//  res.setHeader('Content-Type', 'text/html');
-//  res.write('<pre>logging button presses:\n');
-//  stream.pipe(res);
-//}).listen(8080);
