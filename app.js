@@ -7,7 +7,7 @@ var GPIO = require('onoff').Gpio,
 
 var myFirebaseRef = new Firebase('https://raspberrymovies.firebaseio.com/');
 
-myFirebaseRef.child('bikes').on("value", function(snapshot) {
+myFirebaseRef.child('raspberry').on("value", function(snapshot) {
   console.log(snapshot.val());
 });
 
@@ -22,10 +22,12 @@ button.watch(function(err, state) {
   if(state == 1) {
     // turn LED on
     myFirebaseRef.child('bikes/bay1').set(false);
+    myFirebaseRef.child('raspberry/flashled').set(true);
     led.writeSync(1);
   } else {
     // turn LED off
     myFirebaseRef.child('bikes/bay1').set(true);
+    myFirebaseRef.child('raspberry/flashled').set(false);
     led.writeSync(0);
   }
 });

@@ -1,67 +1,92 @@
-// Get a database reference to our posts
-var ref = new Firebase("https://raspberrymovies.firebaseio.com/");
+'use strict';
 
-// Attach an asynchronous callback to read the data at our posts reference
-ref.on("value", function(snapshot) {
-
-  var standStatus = snapshot.val(); 
-  console.log(standStatus);
-
-    jQuery.each(standStatus.bikes, function(index,element) {
-        console.log(index);
-        console.log(element);
-       
-       if(element){
-          $('#'+ index).removeClass('btn-default');
-          $('#'+ index).addClass('btn-success');
-          $('#'+ index).removeClass('btn-danger');
-        } 
-        else {
-          $('#'+ index).removeClass('btn-default');
-          $('#'+ index).removeClass('btn-success');
-          $('#'+ index).addClass('btn-danger');
-        }
-    });
-
-}, function (errorObject) {
-  console.log("The read failed: " + errorObject.code);
-});
-
-var raspberryMovies = angular.module('raspberryMovies', ['ngRoute']);
+//// Get a database reference to our posts
+var raspberryMovies = angular.module('raspberryMovies', ['ui.router','firebase']);
 
     // configure our routes
-    raspberryMovies.config(function($routeProvider) {
-        $routeProvider
-
+    raspberryMovies.config(function ($stateProvider, $urlRouterProvider) {
+        $stateProvider
             // route for the home page
-            .when('/', {
+            .state('home', {
+                url: '/',
                 templateUrl : 'pages/home.html',
-                controller  : 'mainController'
+                controller  : 'MainCtrl as mainCtrl'
             })
 
-            // route for the about page
-            .when('/choose', {
+            // route for the choose page
+            .state('choose', {
+                url: '/choose',
                 templateUrl : 'pages/choose.html',
-                controller  : 'chooseController'
+                controller  : 'ChooseCtrl as chooseCtrl'
             })
 
-            // route for the contact page
-            .when('/watch', {
+            // route for the watch page
+            .state('watch', {
+                url: '/watch',
                 templateUrl : 'pages/watch.html',
-                controller  : 'watchController'
+                controller  : 'WatchCtrl as watchCtrl'
             });
+        $urlRouterProvider.otherwise('/');
     });
+
+raspberryMovies.constant('FirebaseUrl', 'https://raspberrymovies.firebaseio.com/');
+
+
+raspberryMovies.factory('Raspberry',function($firebaseArray, $firebaseObject,FirebaseUrl) {
+    var raspberryRef = new Firebase(FirebaseUrl+'/raspberry');
+    var raspberry = $firebaseArray(raspberryRef);
+    
+    var Raspberry = {
+        all: raspberry,
+        ref: raspberryRef
+    };
+    
+    return Raspberry;
+});
+
+
 
     // create the controller and inject Angular's $scope
-    raspberryMovies.controller('mainController', function($scope) {
+    raspberryMovies.controller('MainCtrl', function() {
+        var mainCtrl = this;
         // create a message to display in our view
-        $scope.message = 'Everyone come and see how good I look!';
+        mainCtrl.message = 'Raspberry Movies home page!';
     });
 
-    raspberryMovies.controller('chooseController', function($scope) {
+    raspberryMovies.controller('ChooseCtrl', function($state, $scope) {
+        var chooseCtrl = this;
         $scope.message = 'Choose your next movie for your friend.';
     });
 
-    raspberryMovies.controller('watchController', function($scope) {
-        $scope.message = 'Your friend chose a movie for you. Watch it here.';
+    raspberryMovies.controller('WatchCtrl', function(Raspberry,$firebaseObject) {
+        
+        var watchCtrl = this;
+        watchCtrl.message = 'before getting firebase stuff';
+                
+        var obj = $firebaseObject(Raspberry.ref);
+
+         // to take an action after the data loads, use the $loaded() promise
+         obj.$loaded().then(function() {
+            console.log("loaded record:", obj.$id, obj.flashled);
+         });
+        
+        
+//        raspberryRef.on('value', function(snapshot) {
+//         console.log(snapshot.val());
+//            if(snapshot.val().bikes.bay1){
+//                console.log('bay1 is: ' + snapshot.val().bikes.bay1);
+//                //$scope.message = 'You have a movie waiting. Press the button on the Raspberry Pi to show it.';
+//                watchCtrl.message = 'You have a movie waiting. Press the button on the Raspberry Pi to show it.';
+//            }
+//            else{
+//                console.log('bay1 is: ' + snapshot.val().bikes.bay1);
+//                //$scope.message = 'Watch your movie here.';
+//                watchCtrl.message = 'Watch your movie here.';
+//            }
+//        }, function (errorObject) {
+//          console.log("The read failed: " + errorObject.code);
+//        });
+        
+        console.log('I am a string');
+
     });
