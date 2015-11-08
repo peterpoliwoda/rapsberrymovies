@@ -1,0 +1,27 @@
+{
+  "name": "bikestand",
+  "version": "1.0.0",
+  "description": "Raspberry Pi IoT Project",
+  "main": "app.js",
+  "dependencies": {
+    "colors": "^1.1.2",
+    "express": "^4.13.3",
+    "firebase": "^2.3.1",
+    "gpio-stream": "^1.0.17",
+    "onoff": "^1.0.3"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/piotrekkmt/bikestand.git"
+  },
+  "author": "Peter Poliwoda <piotrekkmt@gmail.com> (http://www.nautiluslabs.eu)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/piotrekkmt/bikestand/issues"
+  },
+  "homepage": "https://github.com/piotrekkmt/bikestand#readme"
+}
