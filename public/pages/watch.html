@@ -3,5 +3,8 @@
         <h1>Watch Me Page</h1>
         <p>{{ watchCtrl.message }}</p>
         <p ng-if="watchCtrl.icon">{{ watchCtrl.icon }}</p>
+        <p ng-if="watchCtrl.movie">
+            <a href="{{ watchCtrl.movie.title }}">{{ watchCtrl.movie.title }}</a>
+        </p>
     </div>
 

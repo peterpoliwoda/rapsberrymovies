@@ -53,9 +53,20 @@ raspberryMovies.factory('Raspberry',function($firebaseArray, $firebaseObject,Fir
         mainCtrl.message = 'Raspberry Movies home page!';
     });
 
-    raspberryMovies.controller('ChooseCtrl', function($state, $scope,$http) {
+    raspberryMovies.controller('ChooseCtrl', function($state, $scope, $http, Raspberry) {
         var chooseCtrl = this;
         $scope.message = 'Choose your next movie for your friend.';
+        
+        $scope.watchThis = function(title,poster) {
+            console.log('watch this movie:' + poster);
+            var playLink = 'https://play.google.com/store/search?q=' + title + '&c=movies';
+            Raspberry.ref.child('flashled').set(true);
+            Raspberry.ref.child('movie').set({title: title, poster: poster, link: playLink},function(){
+                console.log('Set stuff');
+            });
+//            Raspberry.ref.child('movie').child('poster').set(poster);
+//            Raspberry.ref.child('movie').child('link').set(playLink);
+        };
         
         $http({
               method: 'GET',
@@ -72,7 +83,7 @@ raspberryMovies.factory('Raspberry',function($firebaseArray, $firebaseObject,Fir
               });
     });
 
-    raspberryMovies.controller('WatchCtrl', function(Raspberry,$firebaseObject) {
+    raspberryMovies.controller('WatchCtrl', function(Raspberry,$firebaseObject,$scope) {
         
         var watchCtrl = this;        
         
@@ -85,12 +96,13 @@ raspberryMovies.factory('Raspberry',function($firebaseArray, $firebaseObject,Fir
                 //$scope.message = 'You have a movie waiting. Press the button on the Raspberry Pi to show it.';
                 watchCtrl.message = 'You have a movie waiting. Press the button on the Raspberry Pi to show it.';
                 watchCtrl.icon = '<i class="fa fa-pointer-o"></i>';
-                
+                watchCtrl.movie = null;
             }
             else{
                 console.log('bay1 is: ' + snapshot.val().flashled);
-                watchCtrl.message = 'Watch your movie here.';
+                watchCtrl.message = 'Watch your movie here.' + snapshot.val().movie.title;
                 watchCtrl.movie = snapshot.val().movie;
+                 watchCtrl.movie = snapshot.val().movie;
             }
             
             return watchCtrl.message;
