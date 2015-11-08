@@ -5,7 +5,7 @@ var GPIO = require('onoff').Gpio,
     Firebase = require('firebase'),
     colors = require('colors');
 
-var myFirebaseRef = new Firebase('https://bikestand.firebaseio.com/');
+var myFirebaseRef = new Firebase('https://raspberrymovies.firebaseio.com/');
 
 myFirebaseRef.on("value", function(snapshot) {
   console.log(snapshot.val());
@@ -21,11 +21,11 @@ button.watch(function(err, state) {
   // 1 == pressed, 0 == not pressed
   if(state == 1) {
     // turn LED on
-    myFirebaseRef.child('bay1').set(false);
+    myFirebaseRef.child('bikes/bay1').set(false);
     led.writeSync(1);
   } else {
     // turn LED off
-    myFirebaseRef.child('bay1').set(true);
+    myFirebaseRef.child('bikes/bay1').set(true);
     led.writeSync(0);
   }
 });

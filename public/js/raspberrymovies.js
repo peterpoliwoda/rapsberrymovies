@@ -1,5 +1,5 @@
 // Get a database reference to our posts
-var ref = new Firebase("https://bikestand.firebaseio.com/");
+var ref = new Firebase("https://raspberrymovies.firebaseio.com/");
 
 // Attach an asynchronous callback to read the data at our posts reference
 ref.on("value", function(snapshot) {
@@ -7,7 +7,7 @@ ref.on("value", function(snapshot) {
   var standStatus = snapshot.val(); 
   console.log(standStatus);
 
-    jQuery.each(standStatus, function(index,element) {
+    jQuery.each(standStatus.bikes, function(index,element) {
         console.log(index);
         console.log(element);
        

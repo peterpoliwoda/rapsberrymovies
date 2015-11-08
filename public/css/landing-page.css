@@ -38,11 +38,11 @@ h6 {
     background: 
     /* top, transparent red, faked with gradient */ 
     linear-gradient(
-      rgba(0, 133, 113, 0.45), 
-      rgba(90, 167, 0, 0.45)
+      rgba(231, 29, 50, 0.45),
+      rgba(0, 109, 93, 0.45)
     ),
     /* bottom, image */
-    url(/images/rango-background.jpeg);
+    url(/images/rango-background.jpg);
 /*    background-repeat: no-repeat;
     center center;*/
     background-size: cover;
