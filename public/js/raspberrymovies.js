@@ -61,7 +61,7 @@ raspberryMovies.factory('Raspberry',function($firebaseArray, $firebaseObject,Fir
 
     raspberryMovies.controller('ChooseCtrl', function($state, $scope, $http, Raspberry) {
         var chooseCtrl = this;
-        chooseCtrl.message = 'Choose the next movie for your girlfriend.';
+        chooseCtrl.message = 'Choose a movie for your girlfriend.';
 
         $scope.watchThis = function(title, poster, overview) {
             console.log('watch this movie:' + poster);
