@@ -2,9 +2,23 @@
     <div class="jumbotron text-center">
         <h1>Watch Me Page</h1>
         <p>{{ watchCtrl.message }}</p>
-        <p ng-if="watchCtrl.icon">{{ watchCtrl.icon }}</p>
-        <p ng-if="watchCtrl.movie">
-            <a href="{{ watchCtrl.movie.title }}">{{ watchCtrl.movie.title }}</a>
-        </p>
     </div>
-
+    <div class="row">
+      <div class="col-sm-6 col-md-4 col-centered">
+        <div class="thumbnail watch" ng-if="watchCtrl.icon">
+          <div class="watch">
+            <p>Press the button on the Raspberry Pi to show it.</p>
+            <i class="fa fa-circle-o watch"></i> <br/>
+            <i class="fa fa-hand-pointer-o watch"></i>
+          </div>
+        </div>
+        <div class="thumbnail watch" ng-if="watchCtrl.movie">
+          <img class="media-object" width="242px" src="http://image.tmdb.org/t/p/w300{{ watchCtrl.movie.poster }}" alt="{{ watchCtrl.movie.title }}">
+          <div class="caption">
+            <h3><a href="{{ watchCtrl.movie.link }}">{{ watchCtrl.movie.title }}</a></h3>
+            <p> {{ watchCtrl.movie.overview }}</p>
+            <a class="btn btn-primary" href="{{ watchCtrl.movie.link }}"><i class="fa fa-ticket"></i> Watch {{ watchCtrl.movie.title }}</a>
+          </div>
+        </div>
+    </div>
+  </div>

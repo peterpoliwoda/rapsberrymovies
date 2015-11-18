@@ -1,24 +1,20 @@
 <!-- choose.html -->
     <div class="jumbotron text-center">
         <h1>Choose a movie</h1>
-        <p>{{ chooseCtrl.message }}</p>        
+        <p>{{ chooseCtrl.message }}</p>
     </div>
     <div class="container">
-        <div class="col-md-7" id="movies" ng-repeat="movie in chooseCtrl.movies">
-            <ul class="media-list">
-              <li class="media">
-                <div class="media-left">
-                  <a href="#" ng-click="select">
-                    <img class="media-object" width="250px" src="http://image.tmdb.org/t/p/w300{{ movie.poster_path }}" alt="{{ movie.title }}">
-                  </a>
+        <div class="row">
+            <div class="col-sm-6 col-md-4" id="movies" ng-repeat="movie in chooseCtrl.movies">
+              <div class="thumbnail movie">
+                <img class="media-object" width="242px" src="http://image.tmdb.org/t/p/w300{{ movie.poster_path }}" alt="{{ movie.title }}">
+                <div class="caption">
+                  <h3>{{ movie.title }} ({{ movie.year }})</h3>
+                  <p class="movie-ranking"> Ranking: {{ movie.vote_average }}/10</p>
+                  <p class="movie-description">{{ movie.overview }}</p>
+                  <p><a href="#" class="btn btn-primary" role="button" ng-click="watchThis(movie.title,movie.poster_path,movie.overview)">Watch This!</a></p>
                 </div>
-                <div class="media-body">
-                  <h4 class="media-heading">{{ movie.title }}</h4>
-                    <button class="btn btn-primary" ng-click="watchThis(movie.title,movie.poster_path)">Watch This!</button>
-                    <p>{{ movie.overview }}</p>
-                </div>
-              </li>
-            </ul>
-        </div>
+              </div>
+            </div>
+          </div>
     </div>
-    

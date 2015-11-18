@@ -10,19 +10,24 @@ html {
     height: 100%;
 }
 
-body,
+/*body,*/
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-    font-family: "Lato","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 700;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    /*font-weight: 700;*/
+}
+
+body {
+background: rgb(30, 51, 70);
+
 }
 
 .topnav {
-    font-size: 14px; 
+    font-size: 14px;
 }
 
 .lead {
@@ -35,8 +40,8 @@ h6 {
     padding-bottom: 50px;
     text-align: center;
     color: #f8f8f8;
-    background: 
-    /* top, transparent red, faked with gradient */ 
+    background:
+    /* top, transparent red, faked with gradient */
     linear-gradient(
       rgba(231, 29, 50, 0.45),
       rgba(0, 109, 93, 0.45)
@@ -177,4 +182,44 @@ footer {
 
 p.copyright {
     margin: 15px 0 0;
+}
+
+.fa.fa-hand-pointer-o.watch {
+    font-size: 84px;
+}
+
+.fa.fa-circle-o.watch {
+  font-size: 25px;
+  padding-right: 21px;
+  padding-bottom: 5px;
+}
+
+div.watch {
+  text-align: center;
+  padding: 25px;
+  border-radius: 50px;
+}
+
+li.media {
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+}
+
+div.movie-ranking {
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
+div.movie-description {
+  padding-top: 10px;
+}
+
+div.thumbnail.movie {
+  height: 900px;
+}
+
+.col-centered{
+    float: none;
+    margin: 0 auto;
 }
